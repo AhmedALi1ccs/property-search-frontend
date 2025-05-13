@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/ExportPage.css';
-
+import config from '../config';
 function ExportPage() {
   const [exportFormat, setExportFormat] = useState('csv');
   const [isExporting, setIsExporting] = useState(false);

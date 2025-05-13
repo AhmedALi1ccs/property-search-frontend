@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/ImportPage.css';
-
+import config from '../config';
 function ImportPage() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState('');
