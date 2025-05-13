@@ -51,7 +51,7 @@ function ImportPage() {
       
       // Make actual API call to your Rails backend
       const response = await axios.post(
-        `${config.API_URL}/import`,
+        `${config.API_URL}/mailed/import`,
         formData,
         {
           headers: {
