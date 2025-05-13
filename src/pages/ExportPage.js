@@ -15,7 +15,7 @@ function ExportPage() {
     try {
       // Request the file from the API
       const response = await axios.get(
-        `http://localhost:3000/api/v1/mailed/export`, 
+        `${config.API_URL}/export`, 
         {
           params: { format: exportFormat },
           responseType: 'blob' // Important for handling file downloads

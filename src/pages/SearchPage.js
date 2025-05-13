@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import '../styles/SearchPage.css';
 import axios from 'axios';
 import '../styles/SearchPage.css';
+import config from '../config';
 function SearchPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchType, setSearchType] = useState('both');
@@ -26,7 +27,7 @@ const handleSearch = async (e) => {
       // Add some debugging logs
       console.log('Sending search request:', searchQuery, searchType);
       
-      const response = await axios.get(`http://localhost:3000/api/v1/search`, {
+      const response = await axios.get(`${config.API_URL}/search`, {
         params: {
           q: searchQuery,
           type: searchType
