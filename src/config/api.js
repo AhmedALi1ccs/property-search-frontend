@@ -1,7 +1,6 @@
 // src/config/api.js
-const API_BASE_URL = process.env.NODE_ENV === 'production' 
-  ? 'https://your-backend-domain.com/api/v1'
-  : 'http://localhost:3000/api/v1';
+// Update API base URL to point to your deployed backend
+const API_BASE_URL = 'https://mailing-database-app.uc.r.appspot.com/api/v1';
 
 export const API_ENDPOINTS = {
   MAILED: `${API_BASE_URL}/mailed`,
