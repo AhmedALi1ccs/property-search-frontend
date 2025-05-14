@@ -2,8 +2,7 @@
 import React from 'react';
 import '../styles/HomePage.css';
 import ccsLogo from '../assets/ccs-logo.png'; // You'll need to add this logo file
-import SearchPage from 'SearchPage';
-import ImportPage from './pages/ImportPage';
+import { Link } from 'react-router-dom';
 function HomePage() {
   return (
     <div className="home-container">
@@ -15,8 +14,8 @@ function HomePage() {
           Find detailed information on properties, owners, and mailing histories.
         </p>
         <div className="button-container">
-          <a href="/search"  element={<SearchPage />} className="cta-button">Search Properties</a>
-          <a href="/import" element={<ImportPage />} className="cta-button secondary">Import Data</a>
+          <Link to="/search" className="cta-button">Search Properties</Link>
+          <Link to="/import" className="cta-button secondary">Import Data</Link>
         </div>
       </div>
       
