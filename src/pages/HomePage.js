@@ -2,7 +2,8 @@
 import React from 'react';
 import '../styles/HomePage.css';
 import ccsLogo from '../assets/ccs-logo.png'; // You'll need to add this logo file
-
+import SearchPage from './pages/SearchPage';
+import ImportPage from './pages/ImportPage';
 function HomePage() {
   return (
     <div className="home-container">
