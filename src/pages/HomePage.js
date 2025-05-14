@@ -29,7 +29,7 @@ function HomePage() {
           </div>
           <div className="feature-card">
             <i className="fas fa-database feature-icon"></i>
-            <h3>Cash Offer</h3>
+            <h3>Cash Offer Finder</h3>
             <p>Comprehensive database of property mailings with detailed information</p>
           </div>
           <div className="feature-card">
