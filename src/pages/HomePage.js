@@ -14,8 +14,8 @@ function HomePage() {
           Find detailed information on properties, owners, and mailing histories.
         </p>
         <div className="button-container">
-          <a href="/search" className="cta-button">Search Properties</a>
-          <a href="/import" className="cta-button secondary">Import Data</a>
+          <a href="https://ahmedali1ccs.github.io/property-search-frontend/#/search" className="cta-button">Search Properties</a>
+          <a href="https://ahmedali1ccs.github.io/property-search-frontend/#/import" className="cta-button secondary">Import Data</a>
         </div>
       </div>
       
