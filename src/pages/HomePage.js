@@ -14,8 +14,8 @@ function HomePage() {
           Find detailed information on properties, owners, and mailing histories.
         </p>
         <div className="button-container">
-          <Link to="/search" className="cta-button">Search Properties</Link>
-          <Link to="/import" className="cta-button secondary">Import Data</Link>
+          <Link to="/property-search-frontend/#/search" className="cta-button">Search Properties</Link>
+          <Link to="/property-search-frontend/#/import" className="cta-button secondary">Import Data</Link>
         </div>
       </div>
       
