@@ -16,7 +16,7 @@ function HomePage() {
         </p>
         <div className="button-container">
           <a href="/search"  element={<SearchPage />} className="cta-button">Search Properties</a>
-          <a href="/import" className="cta-button secondary">Import Data</a>
+          <a href="/import" element={<ImportPage />} className="cta-button secondary">Import Data</a>
         </div>
       </div>
       
