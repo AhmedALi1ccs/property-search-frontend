@@ -2,7 +2,7 @@
 import React from 'react';
 import '../styles/HomePage.css';
 import ccsLogo from '../assets/ccs-logo.png'; // You'll need to add this logo file
-import SearchPage from './pages/SearchPage';
+import SearchPage from 'SearchPage';
 import ImportPage from './pages/ImportPage';
 function HomePage() {
   return (
@@ -15,7 +15,7 @@ function HomePage() {
           Find detailed information on properties, owners, and mailing histories.
         </p>
         <div className="button-container">
-          <a href="/search" className="cta-button">Search Properties</a>
+          <a href="/search"  element={<SearchPage />} className="cta-button">Search Properties</a>
           <a href="/import" className="cta-button secondary">Import Data</a>
         </div>
       </div>
