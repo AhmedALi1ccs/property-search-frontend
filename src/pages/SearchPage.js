@@ -4,6 +4,7 @@ import '../styles/SearchPage.css';
 import axios from 'axios';
 import '../styles/SearchPage.css';
 import config from '../config';
+
 function SearchPage() {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchType, setSearchType] = useState('both');
@@ -12,123 +13,171 @@ function SearchPage() {
     const [message, setMessage] = useState('');
   
     // Update your search function in SearchPage.js to include error details
-const handleSearch = async (e) => {
-    e.preventDefault();
-    
-    if (!searchQuery.trim()) {
-      setMessage('Please enter a search term');
-      return;
-    }
-    
-    setIsLoading(true);
-    setMessage('');
-    
-    try {
-      // Add some debugging logs
-      console.log('Sending search request:', searchQuery, searchType);
-      
-      const response = await axios.get(`${config.API_URL}/search`, {
-        params: {
-          q: searchQuery,
-          type: searchType
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        
+        if (!searchQuery.trim()) {
+          setMessage('Please enter a search term');
+          return;
         }
-      });
-      
-      // Log the response
-      console.log('Search response:', response.data);
-      
-      setSearchResults(response.data);
-      setIsLoading(false);
-      
-      if (response.data.length === 0) {
-        setMessage('No results found. Try a different search term.');
-      }
-    } catch (error) {
-      console.error('Search error:', error);
-      // Show more detailed error information
-      setMessage(`Error: ${error.message || 'An unknown error occurred'}`);
-      setIsLoading(false);
-    }
-  };
+        
+        setIsLoading(true);
+        setMessage('');
+        
+        try {
+          // Add some debugging logs
+          console.log('Sending search request:', searchQuery, searchType);
+          
+          const response = await axios.get(`${config.API_URL}/search`, {
+            params: {
+              q: searchQuery,
+              type: searchType
+            }
+          });
+          
+          // Log the response
+          console.log('Search response:', response.data);
+          
+          setSearchResults(response.data);
+          setIsLoading(false);
+          
+          if (response.data.length === 0) {
+            setMessage('No results found. Try a different search term.');
+          }
+        } catch (error) {
+          console.error('Search error:', error);
+          // Show more detailed error information
+          setMessage(`Error: ${error.message || 'An unknown error occurred'}`);
+          setIsLoading(false);
+        }
+    };
 
-  return (
-    <div className="search-container">
-      <h1>Property Search</h1>
-      <p className="search-intro">
-        Search for properties by address, owner information, or other details.
-      </p>
-      
-      <div className="search-form-container">
-        <form onSubmit={handleSearch} className="search-form">
-          <div className="search-input-group">
-            <input
-              type="text"
-              placeholder="Enter address, name, or zip code..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="search-input"
-            />
-            
-            <select 
-              value={searchType} 
-              onChange={(e) => setSearchType(e.target.value)}
-              className="search-type"
-            >
-              <option value="both">All Addresses</option>
-              <option value="property">Property Address Only</option>
-              <option value="mailing">Mailing Address Only</option>
-            </select>
+    // Helper function to format the mail period
+    const formatMailPeriod = (month, year) => {
+        if (!month && !year) return 'N/A';
+        if (!year) return month || 'N/A';
+        if (!month) return year.toString();
+        return `${month} ${year}`;
+    };
+
+    // Helper function to safely parse and format checkval
+    const formatCheckval = (checkval) => {
+        if (!checkval || checkval === 'Call us') return 'Call us';
+        const num = parseFloat(checkval);
+        return isNaN(num) ? checkval : `$${num.toLocaleString()}`;
+    };
+
+    return (
+        <div className="search-container">
+          <h1>Property Search</h1>
+          <p className="search-intro">
+            Search for properties by address, owner information, or other details.
+          </p>
+          
+          <div className="search-form-container">
+            <form onSubmit={handleSearch} className="search-form">
+              <div className="search-input-group">
+                <input
+                  type="text"
+                  placeholder="Enter address, name, or zip code..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="search-input"
+                />
+                
+                <select 
+                  value={searchType} 
+                  onChange={(e) => setSearchType(e.target.value)}
+                  className="search-type"
+                >
+                  <option value="both">All Addresses</option>
+                  <option value="property">Property Address Only</option>
+                  <option value="mailing">Mailing Address Only</option>
+                </select>
+              </div>
+              
+              <button type="submit" className="search-button">
+                {isLoading ? 'Searching...' : 'Search'}
+              </button>
+            </form>
           </div>
           
-          <button type="submit" className="search-button">
-            {isLoading ? 'Searching...' : 'Search'}
-          </button>
-        </form>
-      </div>
-      
-      {message && <p className="search-message">{message}</p>}
-      
-      {searchResults.length > 0 && (
-        <div className="search-results">
-          <h2>Search Results</h2>
-          <div className="results-table-container">
-            <table className="results-table">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>Property Address</th>
-                  <th>Mailing Address</th>
-                  <th>Value</th>
-                  <th>Month</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {searchResults.map(result => (
-                  <tr key={result.id}>
-                    <td>{result.full_name}</td>
-                    <td>
-                      {result.property_address}<br />
-                      {result.property_city}, {result.property_state} {result.property_zip}
-                    </td>
-                    <td>
-                      {result.mailing_address}<br />
-                      {result.mailing_city}, {result.mailing_state} {result.mailing_zip}
-                    </td>
-                    <td>${parseFloat(result.checkval).toLocaleString()}</td>
-                    <td>{result.mail_month}</td>
-                    <td>
-                      <button className="action-button view">View</button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          {message && <p className="search-message">{message}</p>}
+          
+          {searchResults.length > 0 && (
+            <div className="search-results">
+              <h2>Search Results ({searchResults.length} found)</h2>
+              <div className="results-table-container">
+                <table className="results-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Property Address</th>
+                      <th>Mailing Address</th>
+                      <th>Value</th>
+                      <th>Mail Period</th>
+                      <th>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {searchResults.map(result => (
+                      <tr key={result.id}>
+                        <td>
+                          <div className="name-cell">
+                            <div className="full-name">{result.full_name || 'N/A'}</div>
+                            {result.first_name && result.last_name && (
+                              <div className="name-parts">
+                                {result.first_name} {result.last_name}
+                              </div>
+                            )}
+                          </div>
+                        </td>
+                        <td>
+                          <div className="address-cell">
+                            <div className="street">{result.property_address || 'N/A'}</div>
+                            <div className="location">
+                              {[result.property_city, result.property_state, result.property_zip]
+                                .filter(Boolean)
+                                .join(', ')}
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div className="address-cell">
+                            <div className="street">{result.mailing_address || 'N/A'}</div>
+                            <div className="location">
+                              {[result.mailing_city, result.mailing_state, result.mailing_zip]
+                                .filter(Boolean)
+                                .join(', ')}
+                            </div>
+                          </div>
+                        </td>
+                        <td className="value-cell">
+                          {formatCheckval(result.checkval)}
+                        </td>
+                        <td className="period-cell">
+                          {formatMailPeriod(result.mail_month, result.mail_year)}
+                        </td>
+                        <td>
+                          <button 
+                            className="action-button view"
+                            onClick={() => {
+                              // You can add a modal or detail view here
+                              console.log('Viewing record:', result);
+                            }}
+                          >
+                            View
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
-      )}
-    </div>
-  );
+    );
 }
 
 export default SearchPage;

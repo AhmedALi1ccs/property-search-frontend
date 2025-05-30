@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../styles/ImportPage.css';
 import config from '../config';
+
 function ImportPage() {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploadStatus, setUploadStatus] = useState('');
@@ -76,6 +77,58 @@ function ImportPage() {
     }
   };
 
+  const downloadSampleCSV = () => {
+    const headers = [
+      'full_name',
+      'first_name', 
+      'last_name',
+      'property_address',
+      'property_city',
+      'property_state',
+      'property_zip',
+      'mailing_address',
+      'mailing_city',
+      'mailing_state',
+      'mailing_zip',
+      'checkval',
+      'mail_month',
+      'mail_year'
+    ];
+    
+    const sampleData = [
+      [
+        'John Doe',
+        'John',
+        'Doe', 
+        '123 Main St',
+        'Anytown',
+        'CA',
+        '12345',
+        '456 Oak Ave',
+        'Somewhere',
+        'CA',
+        '67890',
+        '250000',
+        'January',
+        '2024'
+      ]
+    ];
+    
+    const csvContent = [headers, ...sampleData]
+      .map(row => row.map(field => `"${field}"`).join(','))
+      .join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'mailing_data_template.csv';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="import-container">
       <h1>Import Mailing Data</h1>
@@ -140,6 +193,11 @@ function ImportPage() {
             </div>
           </div>
           
+          <div className="result-details">
+            <p><strong>Total processed:</strong> {uploadResult.total}</p>
+            <p><strong>Duration:</strong> {uploadResult.duration} seconds</p>
+          </div>
+          
           {uploadResult.errors && uploadResult.errors.length > 0 && (
             <div className="error-list">
               <h3>Errors:</h3>
@@ -168,10 +226,30 @@ function ImportPage() {
           <li><strong>mailing_city</strong> - Mailing city</li>
           <li><strong>mailing_state</strong> - Mailing state (2-letter code)</li>
           <li><strong>mailing_zip</strong> - Mailing ZIP code</li>
-          <li><strong>checkval</strong> - Property value (can be in format $123,456.78)</li>
-          <li><strong>mail_month</strong> - Month for mailing campaign</li>
+          <li><strong>checkval</strong> - Property value (can be in format $123,456.78 or 123456.78)</li>
+          <li><strong>mail_month</strong> - Month for mailing campaign (e.g., "January", "February")</li>
+          <li><strong>mail_year</strong> - Year for mailing campaign (e.g., "2024", "2025") - Optional, defaults to current year</li>
         </ul>
-        <p>Download our <a href="#" className="template-link">CSV template</a> to ensure your data is formatted correctly.</p>
+        
+        <div className="template-download">
+          <button 
+            onClick={downloadSampleCSV}
+            className="template-button"
+          >
+            Download CSV Template
+          </button>
+          <p>Download our sample CSV template to ensure your data is formatted correctly.</p>
+        </div>
+
+        <div className="import-notes">
+          <h4>Important Notes:</h4>
+          <ul>
+            <li>If <strong>mail_year</strong> is not provided, it will default to the current year</li>
+            <li>Records are updated based on property address - newer dates will overwrite older ones</li>
+            <li>Property address is required - rows without it will be skipped</li>
+            <li>Checkval can include dollar signs and commas - they will be automatically removed</li>
+          </ul>
+        </div>
       </div>
     </div>
   );

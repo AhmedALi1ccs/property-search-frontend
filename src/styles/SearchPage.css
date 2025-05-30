@@ -1,6 +1,6 @@
 /* src/styles/SearchPage.css */
 .search-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 40px 20px;
   }
@@ -92,22 +92,71 @@
     width: 100%;
     border-collapse: collapse;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background-color: white;
   }
   
   .results-table th, .results-table td {
     padding: 12px 15px;
     text-align: left;
     border-bottom: 1px solid #ddd;
+    vertical-align: top;
   }
   
   .results-table th {
     background-color: #f8f9fa;
     color: #2c3e50;
     font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 10;
   }
   
   .results-table tr:hover {
     background-color: #f5f5f5;
+  }
+  
+  /* Enhanced cell styling */
+  .name-cell {
+    min-width: 150px;
+  }
+  
+  .full-name {
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 2px;
+  }
+  
+  .name-parts {
+    font-size: 0.85em;
+    color: #666;
+  }
+  
+  .address-cell {
+    min-width: 200px;
+  }
+  
+  .street {
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 2px;
+  }
+  
+  .location {
+    font-size: 0.85em;
+    color: #666;
+  }
+  
+  .value-cell {
+    font-weight: 500;
+    color: #27ae60;
+    text-align: right;
+    min-width: 120px;
+  }
+  
+  .period-cell {
+    font-weight: 500;
+    color: #8e44ad;
+    min-width: 120px;
   }
   
   .action-button {
@@ -128,6 +177,17 @@
     background-color: #2980b9;
   }
   
+  /* Responsive design */
+  @media (max-width: 1200px) {
+    .results-table {
+      font-size: 14px;
+    }
+    
+    .results-table th, .results-table td {
+      padding: 8px 10px;
+    }
+  }
+  
   @media (max-width: 768px) {
     .search-form {
       flex-direction: column;
@@ -139,5 +199,17 @@
     
     .search-type {
       width: 100%;
+    }
+    
+    .results-table-container {
+      font-size: 12px;
+    }
+    
+    .name-cell, .address-cell {
+      min-width: 120px;
+    }
+    
+    .value-cell, .period-cell {
+      min-width: 80px;
     }
   }
