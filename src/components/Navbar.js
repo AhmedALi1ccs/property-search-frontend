@@ -11,8 +11,8 @@ function Navbar() {
         </Link>
         <div>
           <Link to="/" style={{ color: 'white', textDecoration: 'none', marginRight: '1rem' }}>Home</Link>
-          <Link to="/search" style={{ color: 'white', textDecoration: 'none', marginRight: '1rem' }}>Search</Link>
-          <Link to="/import" style={{ color: 'white', textDecoration: 'none', marginRight: '1rem' }}>Import</Link>
+          // <Link to="/search" style={{ color: 'white', textDecoration: 'none', marginRight: '1rem' }}>Search</Link>
+          // <Link to="/import" style={{ color: 'white', textDecoration: 'none', marginRight: '1rem' }}>Import</Link>
           <Link to="/export" style={{ color: 'white', textDecoration: 'none', marginRight: '1rem' }}>Export</Link>
         </div>
       </div>
