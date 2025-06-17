@@ -177,6 +177,29 @@
     background-color: #2980b9;
   }
   
+  /* Lists cell styling */
+  .lists-cell {
+    min-width: 150px;
+  }
+  
+  .lists-preview {
+    font-size: 0.875rem;
+    color: #6366f1;
+    font-weight: 500;
+    padding: 4px 8px;
+    background-color: #eef2ff;
+    border-radius: 4px;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+  }
+  
+  .lists-preview:empty {
+    display: none;
+  }
+  
   /* Responsive design */
   @media (max-width: 1200px) {
     .results-table {
@@ -185,6 +208,10 @@
     
     .results-table th, .results-table td {
       padding: 8px 10px;
+    }
+    
+    .lists-preview {
+      max-width: 150px;
     }
   }
   
