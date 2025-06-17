@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/property-search-frontend/static/css/main.5ef5a418.css",
-    "main.js": "/property-search-frontend/static/js/main.ba631154.js",
+    "main.css": "/property-search-frontend/static/css/main.5642d8f5.css",
+    "main.js": "/property-search-frontend/static/js/main.213722f4.js",
     "static/js/453.bf86a7de.chunk.js": "/property-search-frontend/static/js/453.bf86a7de.chunk.js",
     "static/media/ccs-logo.png": "/property-search-frontend/static/media/ccs-logo.c96f078dd10099f4eff2.png",
     "index.html": "/property-search-frontend/index.html",
-    "main.5ef5a418.css.map": "/property-search-frontend/static/css/main.5ef5a418.css.map",
-    "main.ba631154.js.map": "/property-search-frontend/static/js/main.ba631154.js.map",
+    "main.5642d8f5.css.map": "/property-search-frontend/static/css/main.5642d8f5.css.map",
+    "main.213722f4.js.map": "/property-search-frontend/static/js/main.213722f4.js.map",
     "453.bf86a7de.chunk.js.map": "/property-search-frontend/static/js/453.bf86a7de.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5ef5a418.css",
-    "static/js/main.ba631154.js"
+    "static/css/main.5642d8f5.css",
+    "static/js/main.213722f4.js"
   ]
 }
